@@ -25,7 +25,7 @@ s.equate(:s, s.div(:min, 60))
 
 dist_to_iss = s.var(408, :km)
 dist_to_iss2 = s.var(408_000, :m)
-time_to_sun = s.var(4, :min)
+time_to_sun = s.var(8, :min)
 
 # Comparisons
 dist_to_iss == dist_to_iss2 # => true
@@ -38,7 +38,7 @@ puts dist_to_iss + dist_to_iss2 # => 816 km
 # Convert
 time_to_sun_in_s = time_to_sun.convert(:s)
 time_to_sun_in_s.dim  # => s
-puts time_to_sun_in_s # => 240 s
+puts time_to_sun_in_s # => 480 s
 ```
 
 ## To be done
