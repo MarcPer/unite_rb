@@ -23,5 +23,6 @@ module UniteRb
 
   (
     UndefinedDimension = Class.new(Error)
-  ).name
+	).name
+	
 end
