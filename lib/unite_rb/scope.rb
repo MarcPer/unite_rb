@@ -17,7 +17,7 @@ module UniteRb
       end
     end
 
-		def var(val = 0, dim_name)
+		def var(val, dim_name)
 			find_add_dimension(dim_name)
       Var.new(val, @dims[dim_name], self)
     end
