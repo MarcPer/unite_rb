@@ -24,4 +24,5 @@ module UniteRb
   (
     UndefinedDimension = Class.new(Error)
   ).name
+	
 end

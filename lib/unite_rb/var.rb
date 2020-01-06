@@ -7,7 +7,7 @@ module UniteRb
 
     attr_reader :val, :dim
     def initialize(val, dim, scope)
-      raise ArgumentError.new("First argument has to be of Numeric type") unless val.is_a?(Numeric)
+			raise ArgumentError.new("First argument has to be of Numeric type") unless val.is_a?(Numeric)
       @val = val
       @dim = dim
       @scope = scope
@@ -43,14 +43,15 @@ module UniteRb
     end
 
     ARITHMETIC_OPERATORS.each do |op|
-      define_method(op) do |other|
+			define_method(op) do |other|
+				other = Var.new(other, dim, @scope) if other.is_a?(Numeric)
         @scope.var(val.send(op, scaled_val(other)), dim.name)
       end
     end
 
     private
 
-    def scaled_val(other)
+		def scaled_val(other)
       other_dim = other.dim
       rel = dim.relations[other_dim.name]
       raise UnrelatedDimensions.new("No relation exists between dimensions #{dim.name} and #{other_dim.name}") if rel.nil?
@@ -61,7 +62,7 @@ module UniteRb
       when :add then other.val - rel.val
       when :sub then other.val + rel.val
       else raise UnknownOperation.new("Operation #{rel.op} unknown. It should be one of #{OPERATIONS}")
-      end
+			end
     end
   end
 end
