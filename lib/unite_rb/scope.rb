@@ -19,14 +19,12 @@ module UniteRb
 
 		def var(val = 0, dim_name)
 			find_add_dimension(dim_name)
-			# I'm removing the error here to allow for a shortcut to insert a dimension through var"
-			# raise UndefinedDimension.new("Dimension #{dim_name} not defined") if dim.nil?
       Var.new(val, @dims[dim_name], self)
     end
 
     def mul(dim_name, val)
-      dim = dims[dim_name]
-      ComplexDimension.new(:mul, dim, val)
+    	dim = dims[dim_name]
+    	ComplexDimension.new(:mul, dim, val)
     end
 
     def div(dim_name, val)
