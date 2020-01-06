@@ -44,6 +44,7 @@ module UniteRb
 
     ARITHMETIC_OPERATORS.each do |op|
 			define_method(op) do |other|
+				other = Var.new(other, dim, @scope) if other.is_a?(Numeric)
         @scope.var(val.send(op, scaled_val(other)), dim.name)
       end
     end
@@ -51,24 +52,17 @@ module UniteRb
     private
 
 		def scaled_val(other)
-			# If the second val is just a number, then assume it has the same unit:
-			if other.is_a?(Numeric)
-				other_dim = dim
-				other_val = other
-			else
-				other_dim = other.dim
-				other_val = other.val
-			end
+      other_dim = other.dim
       rel = dim.relations[other_dim.name]
       raise UnrelatedDimensions.new("No relation exists between dimensions #{dim.name} and #{other_dim.name}") if rel.nil?
       case rel.op
-      when :id then other_val
-      when :mul then other_val / rel.val
-      when :div then other_val * rel.val
-      when :add then other_val - rel.val
-      when :sub then other_val + rel.val
+      when :id then other.val
+      when :mul then other.val / rel.val
+      when :div then other.val * rel.val
+      when :add then other.val - rel.val
+      when :sub then other.val + rel.val
       else raise UnknownOperation.new("Operation #{rel.op} unknown. It should be one of #{OPERATIONS}")
-      end
+			end
     end
   end
 end
