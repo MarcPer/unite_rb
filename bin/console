@@ -6,7 +6,6 @@ $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
 
 require 'unite_rb'
 require 'irb'
-require 'pry'
 
 Signal.trap('INT') do
   warn("\n#{caller.join("\n")}: interrupted")
