@@ -58,8 +58,8 @@ module UniteRb
       when :id then other.val
       when :mul then other.val / rel.val
       when :div then other.val * rel.val
-      when :add then other.val - rel.val
-      when :sub then other.val + rel.val
+      when :add then other.val + rel.val
+      when :sub then other.val - rel.val
       else raise UnknownOperation.new("Operation #{rel.op} unknown. It should be one of #{OPERATIONS}")
       end
     end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "pry"
 
 describe "Equality between variables" do
   let(:scope) do
@@ -164,7 +163,7 @@ describe "Equality between variables" do
     context "related through a constant positive offset" do
       let(:dimensions) { %i[hour_utc hour_cet] }
       before do
-        scope.equate(:hour_cet, scope.sub(:hour_utc, 2))
+        scope.equate(:hour_cet, scope.add(:hour_utc, 2))
       end
 
       context "and they are equal considering their units" do
